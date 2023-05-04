@@ -1,0 +1,31 @@
+{% extends "property/base.html" %}
+
+{% block content %}
+<div class="container mt-5 pt-5 col-6">
+  <form method="POST">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="{{ form.username.id_for_label }}">Username:</label>
+    {{ form.username }}
+    {% for error in form.username.errors %}
+      <p style="color: red">{{ error }}</p>
+    {% endfor %}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.password1.id_for_label }}">Password:</label>
+    {{ form.password1 }}
+    {% for error in form.password1.errors %}
+      <p style="color: red">{{ error }}</p>
+    {% endfor %}
+  </div>
+  <div class="mb-3">
+    <label for="{{ form.password2.id_for_label }}">Confirm Password:</label>
+    {{ form.password2 }}
+    {% for error in form.password2.errors %}
+      <p style="color: red">{{ error }}</p>
+    {% endfor %}
+  </div>
+  <button type="submit">Register</button>
+</form>
+</div>
+{% endblock %}

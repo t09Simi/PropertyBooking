@@ -1,0 +1,37 @@
+{% extends "property/base.html" %}
+
+{%  block content %}
+{% if form.errors %}
+  <div class="alert alert-danger">
+    <strong>Error:</strong> Your username and password didn't match. Please try again.
+  </div>
+{% endif %}
+
+{% if next %}
+  {% if user.is_authenticated %}
+    <div class="alert alert-warning">
+      <strong>Warning:</strong> Your account doesn't have access to this page. To proceed, please login with an account that has access.
+    </div>
+  {% else %}
+    <div class="alert alert-info">
+      <strong>Info:</strong> Please login to access this page.
+    </div>
+  {% endif %}
+{% endif %}
+
+<form method="POST" class="form-signin" action="{% url 'login' %}">
+  {% csrf_token %}
+  <h2 class="form-signin-heading">Please sign in</h2>
+  <label for="id_username" class="sr-only">Username</label>
+  <input type="text" id="id_username" name="username" class="form-control" placeholder="Username" required autofocus>
+  <label for="id_password" class="sr-only">Password</label>
+  <input type="password" id="id_password" name="password" class="form-control" placeholder="Password" required>
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" name="remember" value="1"> Remember me
+    </label>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+</form>
+{% endblock %}

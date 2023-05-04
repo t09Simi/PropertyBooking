@@ -1,0 +1,103 @@
+{% extends "property/base.html" %}
+
+{%  block content %}
+
+<section class="search-container mb-5 pb-5">
+<div class="container">
+<div class="row">
+<div class="col-lg-9  px-4 mb-5">
+    <form>
+    <div class="row mt-3">
+        <div class="col-md-4">
+        <div class="form-inline">
+            <label class="" for="exampleFormControlSelect1">Room type</label>
+            <select class="form-control" name="room_type" id="exampleFormControlSelect1">
+                <option value="">View room type</option>
+                {% for room in room_type %}
+                <option {% if room.room_type in room_type%} selected {% endif %} value="{{ room.room_type }}">{{ room.room_type }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        </div>
+        <div class="col-md-4">
+        <div class="form-inline">
+            <label class="" for="exampleFormControlSelect1">Sort by</label>
+            <select class="form-control" name="sort_by" id="exampleFormControlSelect2">
+                <option value="">Filter by price</option>
+                <option {% if sort_by == 'ASC' %}selected{% endif %} value="ASC">Low</option>
+                <option {% if sort_by == 'DSC' %}selected{% endif %} value="DSC">High</option>
+
+            </select>
+        </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-inline">
+                <label class="" for="exampleFormControlSelect1">Search</label>
+                <input name="search" class="form-control" value="{{search}}" placeholder="Search">
+            </div>
+
+        </div>
+        <div class="col-md-4">
+            <div class="form-inline">
+               <label class="" for="exampleFormControlSelect1">Location</label>
+                <select name="location" class="form-control" multiple>
+                <option value="">Choose</option>
+                {% for loc in location %}
+                <option {% if loc.neighbourhood_group in location%} selected {% endif %} value="{{ loc.neighbourhood_group }}">{{ loc.neighbourhood_group }}</option>
+                    {% endfor %}
+            </select>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+                <button style="margin-top: 30px;" type="submit" class="btn btn-success">Find</button>
+            </div>
+    </div>
+    </form>
+    {% for rows in page_obj %}
+    <div class="row search-card-result">
+
+        <div class="col-md-5">
+            <h5>{{rows.property.name}}</h5>
+            <p>{{rows.property.number_of_reviews}} reviews</p>
+        </div>
+        <div class="col-md-2 border-left text-center more-offers">
+
+            <span>$ {{rows.price}}</span>
+            <p>{{rows.number_of_beds}} beds</p>
+        </div>
+        <div class="col-md-2 border-left text-center more-offers">
+
+            <a class="active" aria-current="page" href="{% url 'book_room' id=rows.property.id %}">Book Now</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+</div>
+
+</div>
+</section>
+<section>
+{% if page_obj.has_other_pages %}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+        <a href="?page=1">&laquo; first</a>
+        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current-page">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">next</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endif %}
+</section>
+{% endblock %}

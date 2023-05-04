@@ -1,0 +1,46 @@
+{% extends "property/base.html" %}
+
+{%  block content %}
+{% if not user.is_authenticated %}
+  <p>Please <a href="{% url 'property:login' %}?next={{ request.path }}">login</a> to book a room.</p>
+{% else %}
+
+<div class="row search-card-result">
+    <form method="post">
+        {% csrf_token %}
+        <div class="col-md-5">
+            <h5>{{room.property.name}}</h5>
+            <p>{{room.property.number_of_reviews}} reviews</p>
+        </div>
+    <div class="col-md-2 border-left text-center more-offers">
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <label for="">Check in</label>
+                    <p>
+                        <input type="date" name="checkin" id="checkin" class="form-control">
+                    </p>
+                </div>
+                <div class="col-md-12">
+                    <label for="">Check out</label>
+                    <p>
+                        <input type="date" name="checkout" id="checkout" class="form-control">
+                    </p>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-md-12">
+                    <input type="submit" class="btn btn-primary btn-block" value="Book Now">
+                </div>
+            </div>
+
+    </div>
+        <div class="col-md-2 border-left text-center more-offers">
+
+           <span>$ {{room.price}}</span>
+            <p>{{room.number_of_beds}} beds</p>
+        </div>
+    </form>
+    </div>
+    {% endif %}
+{% endblock %}
