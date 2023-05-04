@@ -60,17 +60,18 @@
     <div class="row search-card-result">
 
         <div class="col-md-5">
-            <h5>{{rows.property.name}}</h5>
-            <p>{{rows.property.number_of_reviews}} reviews</p>
+            <h5>{{rows.name}}</h5>
+            <p>{{rows.number_of_reviews}} reviews</p>
         </div>
         <div class="col-md-2 border-left text-center more-offers">
 
-            <span>$ {{rows.price}}</span>
-            <p>{{rows.number_of_beds}} beds</p>
+            <span>$ {{rows.room.price}}</span>
+            <p>{{rows.room.number_of_beds}} beds</p>
         </div>
         <div class="col-md-2 border-left text-center more-offers">
 
-            <a class="active" aria-current="page" href="{% url 'book_room' id=rows.property.id %}">Book Now</a>
+        <a class="active" aria-current="page" href="{% url 'book_room' id=rows.id %}">Book Now</a>
+
         </div>
     </div>
     {% endfor %}

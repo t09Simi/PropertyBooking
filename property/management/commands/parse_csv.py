@@ -47,6 +47,13 @@ class Command(BaseCommand):
             reader = csv.reader(f, delimiter=",")
             next(reader)  # skip the header line
             for row in reader:
+                # Creating room object
+                room = Room.objects.create(
+                    room_type=(row[6]),
+                    price=(row[7]),
+                )
+                room.save()
+
                 # Creating property object
                 property = Property.objects.create(
                     name=(row[0]),
@@ -55,20 +62,14 @@ class Command(BaseCommand):
                     number_of_reviews=(row[9]),
                     latitude=(row[4]),
                     longitude=(row[5]),
+                    room=room,
                 )
                 property.save()
 
-                # Creating room object
-                room = Room.objects.create(
-                    room_type=(row[6]),
-                    property=property,
-                    price=(row[7]),
-                )
-                room.save()
 
                 # Creating Booking object
                 booking = Booking.objects.create(
-                    room=room,
+                    property=property,
                 )
                 booking.save()
 

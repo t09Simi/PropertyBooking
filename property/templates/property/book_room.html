@@ -9,8 +9,8 @@
     <form method="post">
         {% csrf_token %}
         <div class="col-md-5">
-            <h5>{{room.property.name}}</h5>
-            <p>{{room.property.number_of_reviews}} reviews</p>
+            <h5>{{property.name}}</h5>
+            <p>{{property.number_of_reviews}} reviews</p>
         </div>
     <div class="col-md-2 border-left text-center more-offers">
             <div class="row form-group">
@@ -37,8 +37,8 @@
     </div>
         <div class="col-md-2 border-left text-center more-offers">
 
-           <span>$ {{room.price}}</span>
-            <p>{{room.number_of_beds}} beds</p>
+           <span>$ {{property.room.price}}</span>
+            <p>{{property.room.number_of_beds}} beds</p>
         </div>
     </form>
     </div>

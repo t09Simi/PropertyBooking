@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -15,24 +16,24 @@ def home(request):
     room_type_query = request.GET.get('room_type', '')
     sort_by = request.GET.get('sort_by', '')
 
-    rooms = Room.objects.all()
+    property = Property.objects.all()
 
     if search_query:
-        rooms = rooms.filter(property__name__icontains=search_query)
+        property = property.filter(name__icontains=search_query)
 
     if location_query:
-        rooms = rooms.filter(property__neighbourhood_group__in=location_query)
+        property = property.filter(neighbourhood_group__in=location_query)
 
     if room_type_query:
-        rooms = rooms.filter(room_type=room_type_query)
+        property = property.filter(room__room_type=room_type_query)
 
     if sort_by:
         if sort_by == 'ASC':
-            rooms = rooms.order_by('price')
+            property = property.order_by('room__price')
         elif sort_by == 'DSC':
-            rooms = rooms.order_by('-price')
+            property = property.order_by('-room__price')
 
-    paginator = Paginator(rooms, 10)
+    paginator = Paginator(property, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -60,7 +61,8 @@ def register(request):
         password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(request, user)
-        return redirect('/')
+        messages.success(request, 'Registration successful. Welcome!')
+        return redirect('home')
     return render(request, 'property/register.html', {'form': form})
 
 @login_required

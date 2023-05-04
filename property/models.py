@@ -22,6 +22,14 @@ class Customer(models.Model):
     def save_user_profile(sender, instance, **kwargs):
         instance.customer.save()
 
+class Room(models.Model):
+    room_type = models.CharField(max_length=30, null=True, blank=True)
+    price = models.IntegerField(default=80)
+    number_of_beds = models.IntegerField(default=1)
+    availability = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f'{self.room_type},{self.availability},{self.price},{self.number_of_beds}'
 class Property(models.Model):
     name = models.CharField(max_length=500, null=True, blank=True)
     neighbourhood_group = models.CharField(max_length=30, null=True, blank=True)
@@ -29,27 +37,20 @@ class Property(models.Model):
     number_of_reviews = models.IntegerField()
     latitude = models.CharField(max_length=100)
     longitude = models.CharField(max_length=100)
+    room = models.ForeignKey(Room, related_name="property_room", on_delete=models.CASCADE, null=True,
+                             blank=True)
 
     def __str__(self):
-        return f'{self.name},{self.neighbourhood_group},{self.neighbourhood},{self.number_of_reviews},{self.latitude},{self.longitude}'
+        return f'{self.name},{self.room.room_type},{self.neighbourhood_group},{self.neighbourhood},{self.number_of_reviews},{self.latitude},{self.longitude}'
 
-class Room(models.Model):
-    room_type = models.CharField(max_length=30, null=True, blank=True)
-    property = models.ForeignKey(Property, related_name="property_name", on_delete=models.CASCADE, null=True, blank=True)
-    price = models.IntegerField(default=80)
-    number_of_beds = models.IntegerField(default=1)
-    availability = models.BooleanField(default=True)
-
-    def __str__(self):
-        return f'{self.room_type},{self.property},{self.availability},{self.price},{self.number_of_beds}'
 class Booking(models.Model):
     user = models.ForeignKey(Customer, related_name="booking_user", on_delete=models.CASCADE, null=True, blank=True)
-    room = models.ForeignKey(Room, related_name="room_booking", on_delete=models.CASCADE, null=True, blank=True)
+    property = models.ForeignKey(Property, related_name="property_name", on_delete=models.CASCADE, null=True, blank=True)
     check_in = models.DateTimeField(null=True, blank=True)
     check_out = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.user},{self.room},{self.check_in},{self.check_out}'
+        return f'{self.user.username},{self.property.name},{self.check_in},{self.check_out}'
 
 class Payment(models.Model):
     booking = models.ForeignKey(Booking, related_name="booking_details", on_delete=models.CASCADE, null=True, blank=True)

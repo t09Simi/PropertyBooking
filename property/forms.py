@@ -5,11 +5,9 @@ from .models import Booking
 
 
 class RegisterForm(UserCreationForm):
-    username = forms.CharField(max_length=30)
-    first_name = forms.CharField(max_length=30)
-    last_name = forms.CharField(max_length=30)
-    email = forms.EmailField(max_length=50)
-
+    first_name = forms.CharField(max_length=30, required=True, help_text='Required.')
+    last_name = forms.CharField(max_length=30, required=True, help_text='Required.')
+    email = forms.EmailField(max_length=50, required=True, help_text='Required. Enter a valid email address.')
 
     class Meta:
         model = User
@@ -17,15 +15,15 @@ class RegisterForm(UserCreationForm):
 
 class BookingForm(forms.ModelForm):
 
-    check_in = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),
-        input_formats=['%Y-%m-%d'],
+    check_in = forms.DateTimeField(
+        widget=forms.DateInput(attrs={'type': 'datetime-local'}),
+        input_formats=['%Y-%m-%dT%H:%M'],
     )
 
-    check_out = forms.DateField(
-        widget=forms.DateInput(attrs={'type': 'date'}),
-        input_formats=['%Y-%m-%d'],
+    check_out = forms.DateTimeField(
+        widget=forms.DateInput(attrs={'type': 'datetime-local'}),
+        input_formats=['%Y-%m-%dT%H:%M'],
     )
     class Meta:
         model = Booking
-        fields = ['check_in', 'check_out', 'room', 'user']
+        fields = ['check_in', 'check_out', 'property', 'user']
