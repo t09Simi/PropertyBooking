@@ -9,7 +9,7 @@ There are six tables used in this application and the data from csv is used for 
 This will allow you to use admin properties of Django. Create it using this command:
 
     python manage.py createsuperuser
-We can create some random customers using Faker in parse_csv.py file. Access the ,admin page by first running the server using this command:
+We can create some random customers using Faker in parse_csv.py file. Access the http://127.0.0.1:8000/admin, the admin page by first running the server using this command:
     
     python manage.py runserver
 
