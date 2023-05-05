@@ -6,6 +6,7 @@
 {% else %}
 
 <div class="row search-card-result">
+    {%include "property/messages.html"%}
     <form method="post">
         {% csrf_token %}
         <div class="col-md-5">
@@ -17,13 +18,13 @@
                 <div class="col-md-12">
                     <label for="">Check in</label>
                     <p>
-                        <input type="date" name="checkin" id="checkin" class="form-control">
+                        <input type="date" name="check_in" id="checkin" class="form-control">
                     </p>
                 </div>
                 <div class="col-md-12">
                     <label for="">Check out</label>
                     <p>
-                        <input type="date" name="checkout" id="checkout" class="form-control">
+                        <input type="date" name="check_out" id="checkout" class="form-control">
                     </p>
                 </div>
             </div>

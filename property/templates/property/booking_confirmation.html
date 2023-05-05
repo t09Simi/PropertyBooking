@@ -1,0 +1,25 @@
+{% extends "property/base.html" %}
+
+{% block content %}
+<div class="container mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="text-center">Booking Confirmation</h2>
+            <hr>
+        </div>
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Thank you for booking with us!</h5>
+                    <p class="card-text">Your booking ID is: {{ booking.id }}</p>
+                    <p class="card-text">Property: {{ booking.property.name }}</p>
+                    <p class="card-text">Check-in date: {{ booking.check_in }}</p>
+                    <p class="card-text">Check-out date: {{ booking.check_out }}</p>
+                    <p class="card-text">Total cost: ${{ booking.property.room.price }}</p>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

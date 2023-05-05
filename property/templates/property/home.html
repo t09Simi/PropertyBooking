@@ -7,8 +7,9 @@
 <div class="row">
 <div class="col-lg-9  px-4 mb-5">
     <form>
-    <div class="row mt-3">
-        <div class="col-md-4">
+    {% csrf_token %}
+    <div class="row mt-4">
+        <div class="col-md-5">
         <div class="form-inline">
             <label class="" for="exampleFormControlSelect1">Room type</label>
             <select class="form-control" name="room_type" id="exampleFormControlSelect1">
@@ -19,7 +20,7 @@
             </select>
         </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
         <div class="form-inline">
             <label class="" for="exampleFormControlSelect1">Sort by</label>
             <select class="form-control" name="sort_by" id="exampleFormControlSelect2">
@@ -30,14 +31,14 @@
             </select>
         </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-inline">
                 <label class="" for="exampleFormControlSelect1">Search</label>
                 <input name="search" class="form-control" value="{{search}}" placeholder="Search">
             </div>
 
         </div>
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="form-inline">
                <label class="" for="exampleFormControlSelect1">Location</label>
                 <select name="location" class="form-control" multiple>
@@ -49,10 +50,11 @@
             </div>
 
         </div>
-
-        <div class="col-md-4">
-
+            <div class="col-md-5">
+        
+                <div class="form-inline">
                 <button style="margin-top: 30px;" type="submit" class="btn btn-success">Find</button>
+                </div>
             </div>
     </div>
     </form>

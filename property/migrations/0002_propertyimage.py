@@ -3,7 +3,7 @@
 from django.db import migrations, models
 import django.db.models.deletion
 
-
+atomic = False
 class Migration(migrations.Migration):
 
     dependencies = [

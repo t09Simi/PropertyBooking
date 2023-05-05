@@ -1,9 +1,9 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
-from property.models import Property, Room
+from property.models import Property, Room, PropertyEval
 from property.forms import RegisterForm
 # Create your views here.
 # Home page
@@ -57,7 +57,6 @@ def register(request):
         user.customer.last_name = form.cleaned_data.get('last_name')
         user.save()
         username = form.cleaned_data.get('username')
-        print('username', username)
         password = form.cleaned_data.get('password1')
         user = authenticate(username=username, password=password)
         login(request, user)
@@ -69,7 +68,20 @@ def register(request):
 def dashboard(request):
     user = request.user
     if user.is_authenticated & user.is_staff:
-        return render(request, 'property/dashboard.html')
+        property_data = PropertyEval.objects.all()
+        labels = [property.name for property in property_data]
+        prices = [property.price for property in property_data]
+        reviews = [property.number_of_reviews for property in property_data]
+        data = {
+            'labels': labels,
+            'prices': prices,
+            'reviews': reviews,
+        }
+        return render(request, 'property/dashboard.html',{'data': data})
     else:
-        return redirect('property:login.html')
+        return redirect('login.html')
 
+@login_required
+def logout_user(request):
+    logout(request)
+    return redirect('home')
