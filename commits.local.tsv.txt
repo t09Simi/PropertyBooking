@@ -1,0 +1,13 @@
+0b32514f	SIMI MATHAI SIM -	Fri May 5 19:37:44 2023	Updated Readme file and made changes in the dashboard html file
+4f96bd96	SIMI MATHAI SIM -	Fri May 5 17:30:12 2023	Making changes for deployment
+4e16aebe	SIMI MATHAI SIM -	Fri May 5 15:53:55 2023	Checking requirements file
+40c3268a	SIMI MATHAI SIM -	Fri May 5 15:11:39 2023	added requirements.txt
+99958f17	SIMI MATHAI SIM -	Fri May 5 14:39:54 2023	Added styling, charts and fixed booking logic
+1a074103	SIMI MATHAI SIM -	Fri May 5 02:12:53 2023	Made changes in booking table
+072f7184	SIMI MATHAI SIM -	Fri May 5 01:32:21 2023	Added images
+5b04445c	t09Simi	Thu May 4 14:27:35 2023	Changes made in the model and deleted migrations
+dc0b92e0	Simi Mathai Simon	Thu May 4 08:06:31 2023	Update README.md
+d0cd79bd	Simi Mathai Simon	Thu May 4 08:04:10 2023	Update README.md
+0e9885fc	t09Simi	Thu May 4 08:01:30 2023	Updated README.md
+c737beea	Simi Mathai Simon	Thu May 4 06:20:09 2023	Create README.md
+d6f474e1	t09Simi	Thu May 4 06:03:46 2023	initial commit

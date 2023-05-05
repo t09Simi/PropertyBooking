@@ -43,5 +43,8 @@ To install behave use this command: Create features folder and add the scenarios
     pip install behave
     pip install selenium
 
+### User details
+The admin can only login to the dashboard to see the charts so the details of the admin are: username: admin and password:admin123. Registered user details are username: JohnSwan & password:May@2023 ; username: JennyMitchell & password:April@2023
+
 ### Deployment
 The application is deployed on render, a cloud hosting platform. Application URL:https://property-5ud6.onrender.com
