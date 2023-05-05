@@ -1,5 +1,5 @@
 {% extends "property/base.html" %}
-
+{% load static %}
 {%  block content %}
 
 <section class="search-container mb-5 pb-5">
@@ -58,7 +58,12 @@
     </form>
     {% for rows in page_obj %}
     <div class="row search-card-result">
-
+    <div class="col-md-3">
+        
+    <a href="{% url 'book_room' rows.id %}">
+        <img class="img-fluid" src="/static/property_images/property_images" alt="Card image cap">
+    </a>
+    </div>
         <div class="col-md-5">
             <h5>{{rows.name}}</h5>
             <p>{{rows.number_of_reviews}} reviews</p>

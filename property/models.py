@@ -43,6 +43,10 @@ class Property(models.Model):
     def __str__(self):
         return f'{self.name},{self.room.room_type},{self.neighbourhood_group},{self.neighbourhood},{self.number_of_reviews},{self.latitude},{self.longitude}'
 
+class PropertyImage(models.Model):
+    property = models.ForeignKey(Property, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='property_images')
+
 class Booking(models.Model):
     user = models.ForeignKey(Customer, related_name="booking_user", on_delete=models.CASCADE, null=True, blank=True)
     property = models.ForeignKey(Property, related_name="property_name", on_delete=models.CASCADE, null=True, blank=True)

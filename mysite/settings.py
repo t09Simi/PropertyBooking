@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-s4z41(dm2esxsru@pk3f1^=pf3mp-&sn*6+_)w4yzeuidz7h!8
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
+CSRF_TRUSTED_ORIGINS=['https://acrobatdemand-winterigloo-8000.codio-box.uk']
 
 # Application definition
 
@@ -119,6 +119,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_ROOT =  os.path.join(BASE_DIR, 'static/property_images') 
+MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
