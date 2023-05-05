@@ -30,6 +30,7 @@ class Room(models.Model):
 
     def __str__(self):
         return f'{self.room_type},{self.availability},{self.price},{self.number_of_beds}'
+
 class Property(models.Model):
     name = models.CharField(max_length=500, null=True, blank=True)
     neighbourhood_group = models.CharField(max_length=30, null=True, blank=True)
@@ -48,13 +49,13 @@ class PropertyImage(models.Model):
     image = models.ImageField(upload_to='property_images')
 
 class Booking(models.Model):
-    user = models.ForeignKey(Customer, related_name="booking_user", on_delete=models.CASCADE, null=True, blank=True)
+    customer = models.ForeignKey(Customer, related_name="booking_user", on_delete=models.CASCADE, null=True, blank=True)
     property = models.ForeignKey(Property, related_name="property_name", on_delete=models.CASCADE, null=True, blank=True)
     check_in = models.DateTimeField(null=True, blank=True)
     check_out = models.DateTimeField(null=True, blank=True)
 
     def __str__(self):
-        return f'{self.user.username},{self.property.name},{self.check_in},{self.check_out}'
+        return f'{self.customer},{self.property.name},{self.check_in},{self.check_out}'
 
 class Payment(models.Model):
     booking = models.ForeignKey(Booking, related_name="booking_details", on_delete=models.CASCADE, null=True, blank=True)

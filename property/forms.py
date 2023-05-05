@@ -26,4 +26,4 @@ class BookingForm(forms.ModelForm):
     )
     class Meta:
         model = Booking
-        fields = ['check_in', 'check_out', 'property', 'user']
+        fields = ['check_in', 'check_out', 'property', 'customer']
