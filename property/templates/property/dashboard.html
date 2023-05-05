@@ -1,5 +1,12 @@
 {% extends "property/base.html" %}
 {%  block content %}
+<div>
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+<div class="container">
+    <h5> Admin Page </h5>
+<p> Welcome, Admin! You can now view a chart that shows the relationship between property prices and reviews. This chart can help you make informed decisions about property pricing and marketing strategies. Enjoy!</p>
+</div>
 <div class="container">
   <canvas id="myChart"></canvas>
 </div>
@@ -37,4 +44,5 @@
             }
         });
     </script>
+    
 {% endblock %}
